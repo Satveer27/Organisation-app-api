@@ -1,2 +1,2 @@
 # Organisation-app-api
-Organisation-api
+Organisation-api for some organisation
