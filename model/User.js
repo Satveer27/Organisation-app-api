@@ -21,14 +21,16 @@ const UserSchema = new Schema({
     },
     zone:{
         type:String,
-        default:'nozone',
+        required: true,
         enum:['zone1', 'zone2', 'zone3', 'zone4', 'nozone'],
     },
     description:{
         type:String,
+        required: true,
     },
     profileImage:{
         type:String,
+        required: true,
     },
     hasProfileImage:{
         type:Boolean,
