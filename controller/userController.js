@@ -11,8 +11,8 @@ dotenv.config();
 // @access      Private/Admin
 
 export const userRegistrationController = asyncHandler(async(req,res)=>{
-    const {username, email, password} = req.body;
-
+    const {zone, username, email, isAdmin, description, password} = req.body;
+    const convertedImages = req.file.path;
     //check if user exist
     const userExists = await User.findOne({email});
     if(userExists){
@@ -27,6 +27,11 @@ export const userRegistrationController = asyncHandler(async(req,res)=>{
             username, 
             email,
             password: hashedPassword,
+            description,
+            isAdmin,
+            zone,
+            profileImage:convertedImages,
+            hasProfileImage:true,
         })
         //response
         res.status(200).json({
@@ -94,22 +99,10 @@ export const updateUserController = asyncHandler(async(req,res)=>{
     {runValidators: true, returnOriginal: false, useFindAndModify: false},
     {new:true});
 
-    //update hasProfileImage
-    if(user.profileImage != undefined){
-        await User.findByIdAndUpdate(req.params.id,{
-            hasProfileImage:true
-        },{new:true})
-    }
-    else{
-        await User.findByIdAndUpdate(req.params.id,{
-            hasProfileImage:false
-        },{new:true})
-    }
-    const updatedUser = await User.findById(req.params.id);
     res.json({
         status:"success",
         msg: "Users:",
-        updatedUser,
+        user,
     })
 })
 
