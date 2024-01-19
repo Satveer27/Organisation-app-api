@@ -17,8 +17,6 @@ const corsOptions ={
     optionSuccessStatus:200
 }
 
-const cors = require('cors');
-
 //cors
 app.use(cors(corsOptions));
 
