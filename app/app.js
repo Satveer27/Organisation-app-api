@@ -9,7 +9,6 @@ dotenv.config();
 dbConnect();
 
 const app = express();
-app.use(express.json());
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -17,17 +16,16 @@ app.use((req, res, next) => {
       "Access-Control-Allow-Origin",
       "*"
     );
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-    );
-    res.setHeader(
+    res.header(
       "Access-Control-Allow-Headers",
-      "Content-Type,Authorization,GET,HEAD,OPTIONS,POST,PUT,DELETE"
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
+    res.header("Access-Control-Allow-credentials", true);
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
     next();
 });
 
+app.use(express.json());
 
 //routes
 app.use('/api/v1/users/', userRouter);
