@@ -10,12 +10,16 @@ dbConnect();
 
 const app = express();
 
-app.use(cors());
 app.use((req, res, next) => {
     res.setHeader(
       "Access-Control-Allow-Origin",
       "*"
     );
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+    );
+    
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -35,3 +39,4 @@ app.use(notFound);
 app.use(globalErrorHandler);
 
 export default app;
+
