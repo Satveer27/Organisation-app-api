@@ -10,24 +10,7 @@ dbConnect();
 
 const app = express();
 
-app.use((req, res, next) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "*"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-    );
-    
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    res.header("Access-Control-Allow-credentials", true);
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
-    next();
-});
+app.use(cors({ origin: ["http://localhost:3000"] }));
 
 app.use(express.json());
 
