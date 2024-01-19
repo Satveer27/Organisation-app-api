@@ -1,7 +1,7 @@
 //run the application, all other logic go app
 //This app uses MVC structure
 import http from 'http';
-import app from './app/app.js'
+import app from './app/app.js';
 
 //create server
 const PORT = process.env.PORT || 7000
