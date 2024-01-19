@@ -7,11 +7,20 @@ import cors from 'cors';
 
 dotenv.config();
 dbConnect();
+
 const app = express();
 app.use(express.json());
 
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+
+const cors = require('cors');
+
 //cors
-app.use(cors());
+app.use(cors(corsOptions));
 
 //routes
 app.use('/api/v1/users/', userRouter);
