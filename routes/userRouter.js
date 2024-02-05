@@ -11,7 +11,7 @@ userRouter.post('/login', userLoginController);
 userRouter.get('/allUsers', isLoggedIn , isAdmin, getAllUserController);
 userRouter.put('/:id/updateUsers', isLoggedIn , isAdmin, upload.single('file'), updateUserController);
 userRouter.delete('/:id/delete', isLoggedIn , isAdmin, deleteUserController);
-userRouter.delete('/:id', isLoggedIn , isAdmin, getSingleUser);
+userRouter.get('/:id', isLoggedIn , isAdmin, getSingleUser);
 userRouter.get('/zone',getUserByZone);
 
 export default userRouter;
