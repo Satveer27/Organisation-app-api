@@ -140,5 +140,15 @@ export const getUserByZone = asyncHandler(async(req,res)=>{
     })
 })
 
+// @description delete user
+// @route       delete /api/v1/users/:id/delete
+// @access      Private/Admin
+export const deleteUserController = asyncHandler(async(req,res)=>{
+    const users = await User.findByIdAndDelete(req.params.id);
+    res.json({
+        status:"success",
+        msg: "User delete",
+    })
+})
 
 
