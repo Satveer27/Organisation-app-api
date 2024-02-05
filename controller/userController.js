@@ -155,4 +155,17 @@ export const deleteUserController = asyncHandler(async(req,res)=>{
     })
 })
 
-
+// @description get single user
+// @route       GET /api/v1/users/:id
+// @access      Private/Admin
+export const getSingleUser = asyncHandler(async(req,res)=>{
+    const users = await User.findById(req.params.id);
+    if(!users){
+        throw new Error('User not found')
+    }
+    res.json({
+        status:"success",
+        msg: "User fetched:",
+        users,
+    })
+})
