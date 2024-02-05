@@ -11,7 +11,7 @@ dotenv.config();
 // @access      Private/Admin
 
 export const userRegistrationController = asyncHandler(async(req,res)=>{
-    const {zone, username, email, isAdmin, description, password} = req.body;
+    const {zone, username, email, isAdmin, description, password, employeeIdNo, phoneNumber} = req.body;
     const convertedImages = req.file.path;
     //check if user exist
     const userExists = await User.findOne({email});
@@ -32,6 +32,8 @@ export const userRegistrationController = asyncHandler(async(req,res)=>{
             zone,
             profileImage:convertedImages,
             hasProfileImage:true,
+            employeeIdNo,
+            phoneNumber
         })
         //response
         res.status(200).json({
@@ -80,7 +82,7 @@ export const getAllUserController = asyncHandler(async(req,res)=>{
 // @route       PUT /api/v1/users/:id/update
 // @access      Private/Admin
 export const updateUserController = asyncHandler(async(req,res)=>{
-    const {zone, username, email, isAdmin, description} = req.body;
+    const {zone, username, email, isAdmin, description, employeeIdNo, phoneNumber} = req.body;
     const convertedImages = req.file.path;
     const findEmail = await User.findOne({email});
     if(findEmail){
@@ -95,6 +97,8 @@ export const updateUserController = asyncHandler(async(req,res)=>{
         email,
         isAdmin,
         description,
+        employeeIdNo,
+        phoneNumber
     },
     {runValidators: true, returnOriginal: false, useFindAndModify: false},
     {new:true});

@@ -35,7 +35,15 @@ const UserSchema = new Schema({
     hasProfileImage:{
         type:Boolean,
         default:false,
-    }
+    },
+    employeeIdNo:{
+        type:String,
+        required: true,
+    },
+    phoneNumber:{
+        type:String,
+        required: true,
+    },
     
 }, {timestamps:true})
 
