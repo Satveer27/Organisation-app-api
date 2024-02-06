@@ -84,8 +84,12 @@ export const getAllUserController = asyncHandler(async(req,res)=>{
 export const updateUserController = asyncHandler(async(req,res)=>{
     const {zone, username, email, isAdmin, description, employeeIdNo, phoneNumber} = req.body;
     const convertedImages = req.file.path;
+
     const findEmail = await User.findOne({email});
+    const userExists = await User.findById(req.params.id);
+
     if(findEmail){
+        if(userExists?.email != findEmail?.email)
         throw new Error("email already exist");
     }
     
@@ -159,6 +163,7 @@ export const deleteUserController = asyncHandler(async(req,res)=>{
 // @route       GET /api/v1/users/:id
 // @access      Private/Admin
 export const getSingleUser = asyncHandler(async(req,res)=>{
+    console.log(req.params.id)
     const users = await User.findById(req.params.id);
     if(!users){
         throw new Error('User not found')
